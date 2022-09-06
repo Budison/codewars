@@ -26,7 +26,7 @@
         <version.dependency.slf4j-nop>1.7.36</version.dependency.slf4j-nop>
 
         <version.plugin.maven.enforcer>3.0.0</version.plugin.maven.enforcer>
-        <version.plugin.maven.jar>3.2.2</version.plugin.maven.jar>
+<!--        <version.plugin.maven.jar>3.2.2</version.plugin.maven.jar>-->
         <version.plugin.maven.compiler>3.10.1</version.plugin.maven.compiler>
         <version.plugin.maven.resources>3.2.0</version.plugin.maven.resources>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
@@ -85,21 +85,21 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${version.plugin.maven.jar}</version>
-                <configuration>
-                    <archive>
-                        <index>true</index>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>com.github.budison.codewars.Main</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <version>${version.plugin.maven.jar}</version>-->
+<!--                <configuration>-->
+<!--                    <archive>-->
+<!--                        <index>true</index>-->
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <classpathPrefix>libs/</classpathPrefix>-->
+<!--                            <mainClass>com.github.budison.codewars.Main</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
