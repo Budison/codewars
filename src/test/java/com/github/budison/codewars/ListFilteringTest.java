@@ -12,44 +12,64 @@ import static org.testng.Assert.assertEquals;
 public class ListFilteringTest {
 
     @Test
-    public void testListFilteringExamples() {
-        assertEquals(List.of(1,2), ListFiltering.filterList(List.of(1,2,"a","b")),
-                formatInput(List.of(1,2,"a","b")));
-        assertEquals(List.of(1,0,15), ListFiltering.filterList(List.of(1,"a","b",0,15)),
-                formatInput(List.of(1,"a","b",0,15)));
-        assertEquals(List.of(1,2,123), ListFiltering.filterList(List.of(1,2,"aasf","1","123",123)),
-                formatInput(List.of(1,2,"aasf","1","123",123)));
+    public void testListFilteringWithExamples() {
+        // Given
+        List<Object> input1 = List.of(1,2,"a", "b");
+        List<Object> input2 = List.of(1,"a","b",0,15);
+        List<Object> input3 = List.of(1,2,"aasf","1","123",123);
+
+        // Then
+        List<Object> result1 = ListFiltering.filterList(input1);
+        List<Object> result2 = ListFiltering.filterList(input2);
+        List<Object> result3 = ListFiltering.filterList(input3);
+
+        // Then
+        assertEquals(List.of(1,2), result1, formatInput(input1));
+        assertEquals(List.of(1,0,15), result2, formatInput(input2));
+        assertEquals(List.of(1,2,123), result3, formatInput(input3));
     }
 
-    @Test void testListFilteringExtras() {
-        assertEquals(List.of(), ListFiltering.filterList(List.of("a","b","1")),
-                formatInput(List.of("a","b","1")));
-        assertEquals(List.of(1,2), ListFiltering.filterList(List.of(1,2,"a","b")),
-                formatInput(List.of(1,2,"a","b")));
+    @Test void testListFilteringWithBorderCases() {
+        // Given
+        List<Object> borderCase1 = List.of("a", "b", "1");
+        List<Object> borderCase2 = List.of();
+
+        // When
+        List<Object> result1 = ListFiltering.filterList(borderCase1);
+        List<Object> result2 = ListFiltering.filterList(borderCase2);
+
+        // Then
+        assertEquals(List.of(), result1, formatInput(List.of("a","b","1")));
+        assertEquals(List.of(), result2, formatInput(List.of()));
     }
 
     @Test void testListFilteringRandom() {
+        // Given
         ThreadLocalRandom rand = ThreadLocalRandom.current();
+
         for(int i = 0; i < 20; i++) {
             int size = rand.nextInt(20);
-            List<Object> input = new ArrayList<>();
+            List<Object> randomInput = new ArrayList<>();
             List<Integer> expected = new ArrayList<>();
             for(int j = 0; j < size; ++j) {
                 if(rand.nextBoolean()) {
                     int n = rand.nextInt(0, 1000);
-                    input.add(n);
+                    randomInput.add(n);
                     expected.add(n);
                 } else {
                     if(rand.nextBoolean())
-                        input.add(rand.ints(rand.nextInt(6), 48, 123)
+                        randomInput.add(rand.ints(rand.nextInt(6), 48, 123)
                                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                                 .toString());
-                    else input.add(Integer.toString(rand.nextInt(1000)));
+                    else randomInput.add(Integer.toString(rand.nextInt(1000)));
                 }
             }
 
-            List<Object> result = ListFiltering.filterList(List.copyOf(input));
-            assertEquals(expected, result, formatInput(input));
+            // When
+            List<Object> result = ListFiltering.filterList(List.copyOf(randomInput));
+
+            // Then
+            assertEquals(expected, result, formatInput(randomInput));
         }
     }
 
