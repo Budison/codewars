@@ -43,7 +43,7 @@ public class ListFilteringTest {
         assertEquals(List.of(), result2, formatInput(List.of()));
     }
 
-    @Test void testListFilteringRandom() {
+    @Test void testListFilteringWithRandomInput() {
         // Given
         ThreadLocalRandom rand = ThreadLocalRandom.current();
 
