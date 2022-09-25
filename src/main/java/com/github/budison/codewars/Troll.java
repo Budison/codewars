@@ -16,7 +16,6 @@ class Troll {
      * Remove all vowels from the given input string
      *
      * @param str The string to remove vowels from
-     *
      * @return A copy of the original string with all vowels removed
      */
     static String disemvowel(String str) {

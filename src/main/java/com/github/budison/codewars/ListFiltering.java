@@ -11,7 +11,6 @@ class ListFiltering {
      * Filter out all non-integer elements from the given input list
      *
      * @param list The list to filter out from
-     *
      * @return A copy of the original list with all the non-integer elements removed
      */
     static List<Object> filterList(final List<Object> list) {
